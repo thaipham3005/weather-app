@@ -1,43 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge; chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <title>Weather App</title>
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
+
+    <!-- Search Eengine and Browser Meta Tags. -->
+    <meta name="description" content="Weather PWA using ReactJS and Openweather API">
+    <meta name="abstract" content="Weather App">
+    <meta name="rating" content="General">
+
+    <!-- Search engine robots Meta Tags. -->
+    <meta name="robots" content="noindex, nofollow, noodp, noydir, noarchive">
+
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="PWA Weather app using ReactJS and Openweather API" />
+    <link rel="manifest" href="/manifest.json" />
+
+
+    <!-- Open Graph Meta Tags (ogp.me) -->
+    <meta property="og:image" content="https://weather-app.rio-apps.com/graphics/weather-app.jpg">
+
+    <meta property="og:site_name" content="Weather App">
+    <meta property="og:title" content="Weather App">
+    <meta property="og:description" content="PWA Weather app using ReactJS and Openweather API">
+    <meta property="og:type" content="application">
+    <meta property="og:url" content="https://weather-app.rio-apps.com">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <meta property="og:locality" content="Vung Tau">
+    <meta property="og:region" content="Vung Tau">
+    <meta property="og:postal-code" content="790000">
+    <meta property="og:country-name" content="VN">
+    <meta property="og:email" content="thaipham3005@gmail.com">
+    <meta property="og:phone_number" content="+84 977 971 787">
+
+    <!-- Twitter Meta Tags. -->
+    <meta name="twitter:card" content="Weather App">
+    <meta name="twitter:site" content="@thaipham3005">
+    <meta name="twitter:creator" content="@thaipham3005">
+    <meta name="twitter:url" content="https://weather-app.rio-apps.com">
+    <meta name="twitter:title" content="Weather App">
+    <meta name="twitter:description" content="PWA Weather app using ReactJS and Openweather API">
+    <meta name="twitter:image" content="https://weather-app.rio-apps.com/graphics/weather-app.jpg">
+
+    <!-- Web App Settings. -->
+    <meta name="application-name" content="Weather App">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Favicon Meta Tags.  -->
+    <link rel="icon" href="/graphics/favicon.ico">
+    <link rel="icon" href="/graphics/logo16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="/graphics/logo32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/graphics/logo48.png" sizes="48x48" type="image/png">
+    <link rel="icon" href="/graphics/logo60.png" sizes="60x60" type="image/png">
+    <link rel="icon" href="/graphics/logo128.png" sizes="128x128" type="image/png">
+    <link rel="icon" href="/graphics/logo192.png" sizes="192x192" type="image/png">
+
+    <!-- Apple iOS Settings. -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="App Title">
+    <link rel="apple-touch-startup-image" href="/graphics/logo.png">
+
+    <link rel="apple-touch-icon" href="/graphics/logo192.png" />
+    <link rel="apple-touch-icon-precomposed" href="/graphics/apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/graphics/logo57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/graphics/logo60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/graphics/logo72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/graphics/logo76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/graphics/logo120.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/graphics/logo114.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/graphics/logo144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/graphics/logo152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/graphics/logo180.png">
+    <!-- Apple Safari Pinned Site. -->
+    <!-- <link rel="mask-icon" href="path/to/icon.svg" color="white"> -->
+
+</head>
+
+<body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./serviceworker-site.js')
+                    .then((reg) => {
+                        console.log('Success: ' + reg.scope)
+                    })
+                    .catch((err) => {
+                        console.log('Failure: ' + err);
+                    }
+                    )
+            })
+        }
+    </script>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+</body>
+
 </html>
