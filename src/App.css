@@ -3,18 +3,18 @@
 
 
 .material-icons {
-    font-family: 'Material Icons';
+    /* font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
     font-size: 24px;
     /* Preferred icon size */
-    display: inline-block;
+    /* display: inline-block;
     line-height: 1;
     text-transform: none;
     letter-spacing: normal;
     word-wrap: normal;
     white-space: nowrap;
-    direction: ltr;
+    direction: ltr;  */
 
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
@@ -29,20 +29,32 @@
 }
 
 /* Rules for sizing the icon. */
-.material-icons.md-18 {
-    font-size: 18px;
+.font-xs {
+    font-size: .7rem;
 }
 
-.material-icons.md-24 {
-    font-size: 24px;
+.font-sm {
+    font-size: .9rem;
 }
 
-.material-icons.md-36 {
-    font-size: 36px;
+.font-md {
+    font-size: 1.25rem;
 }
 
-.material-icons.md-48 {
-    font-size: 48px;
+.font-xl {
+    font-size: 1.5rem;
+}
+
+.font-xxl {
+    font-size: 2rem;
+}
+
+.font-xxxl {
+    font-size: 2.5rem;
+}
+
+.font-xxxxl {
+    font-size: 3rem;
 }
 
 /* Rules for using icons as black on a light background. */
@@ -265,11 +277,117 @@ sup.unit {
     object-position: center;
 }
 
+.btn {
+    outline: none !important;
+    user-select: none !important;
+    border: none;
+    cursor: pointer;
+    padding: .5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.btn:active span {
+    color: #1565C0;
+
+}
+
+.btn-rounded {
+    border-radius: 50%;
+}
+
+.geo-location {
+    bottom: 2rem;
+    left: 2rem;
+    background-color: #ededed;
+    text-align: center;
+    opacity: .75;
+    color: #696969;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
+}
+
+.geo-location:hover {
+    opacity: 1;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.popup {
+    position: fixed;
+    bottom: 2rem;
+    left: 6rem;
+    transition: transform 2s ease-in;
+    width: fit-content;
+    min-width: 10rem;
+    height: fit-content;
+    border-radius: 1rem;
+    background-image: linear-gradient(to right, #00897B, #1565C0, #283593);
+    color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .5);
+    z-index: 99;
+}
+
+.show-up {
+    transform-origin: 0 -5rem;
+    transform: translateY(0);
+}
+
+footer {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 2rem;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 1.2rem;
+    z-index: 90;
+    padding: 0 1.5rem;
+}
+
+footer .social {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+footer .social i {
+    color: #ababab;
+    font-size: 1.2rem;
+}
+
+footer .social:hover i {
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+footer .social img {
+    background-color: #ababab;
+    border-radius: 50%;
+}
+
+footer .social:hover img {
+    background-color: #fff;
+    transform: scale(1.1);
+
+}
+
 @media screen and (max-width: 1080px) {
     .container .container-info {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+
+    footer {
+        position: relative;
     }
 }
 
@@ -278,8 +396,8 @@ sup.unit {
         /* box-shadow: 0 5px 10px rgba(0, 0, 0, .7); */
         border: .2rem solid rgba(0, 0, 0, .5);
         position: fixed;
-        bottom: 3rem;
-        z-index: 99;
+        bottom: 5rem;
+        z-index: 90;
     }
 
     .container .container-info {
@@ -288,5 +406,3 @@ sup.unit {
         gap: 1rem;
     }
 }
-
-

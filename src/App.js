@@ -3,9 +3,20 @@ import { fetchWeather, fetchCurrentCity, fetchOneCall, URL_ICON } from "./api/fe
 import { GeoLocationPromise } from "./helper/GeoLocation";
 import "./App.css";
 
+import coffee from './graphics/buymeacoffee.svg'
+
 const TIMER = 30 * 60 * 1000
 
+const PopupLocation = (params) => {
+    return (
+        <div className="popup show-up">
+            {`Current location: ${params}`}
+        </div>
+    )
+}
+
 const App = () => {
+    let timeout
     const [query, setQuery] = useState(localStorage.getItem('WeatherApp-city'))
     const [weather, setWeather] = useState({})
     const [location, setLocation] = useState("")
@@ -26,20 +37,42 @@ const App = () => {
         setWeather({ ...current, ...onecall });
         localStorage.setItem('WeatherApp-city', current.name)
 
-        setQuery("")
+        timeout = setTimeout(() => {
+            setQuery(null)
+        }, 5000)
     }
 
+    // Refresh weather information periodically 
     const refreshCurrentWeather = async () => {
         setInterval(async () => {
             await layoutData(localStorage.getItem("WeatherApp-city"))
         }, TIMER)
     }
 
+    // Find location with lat, lon
     const suggestLocation = async (lat, lon) => {
+        clearTimeout(timeout)
         const data = await fetchCurrentCity(lat, lon);
-        setWeather(data);
+        let geoLocation = data.list[0].name
+
+        setQuery(geoLocation)
+        layoutData(geoLocation)
+        timeout = setTimeout(() => {
+            setQuery(null)
+        }, 5000)
 
     }
+
+    // Find latitude, longitude of current device with Geolocation API
+    const checkGeoLocation = async () => {
+        const fetchLocation = async () => await GeoLocationPromise()
+        fetchLocation().then(res => {
+            let lat = res.coords.latitude
+            let lon = res.coords.longitude
+            setLocation({ lat, lon })
+        })
+    }
+
     const renderForecast = weather.daily && weather.daily.slice(0, 6).map((day) => {
         let datetime = new Date(day.dt * 1000)
         let temp = day.temp.day
@@ -100,13 +133,6 @@ const App = () => {
 
     // Take action at UI loaded for the first time
     useEffect(() => {
-        const fetchLocation = async () => await GeoLocationPromise()
-        fetchLocation().then(res => {
-            let lat = res.coords.latitude
-            let lon = res.coords.longitude
-            setLocation({ lat, lon })
-        })
-
         query && layoutData(query)
         refreshCurrentWeather()
     }, [])
@@ -115,8 +141,9 @@ const App = () => {
     // (after device detected GPS location)
     useEffect(() => {
         console.log(location);
-        if (location)
+        if (location) {
             suggestLocation(location.lat, location.lon)
+        }
 
     }, [location])
 
@@ -203,7 +230,7 @@ const App = () => {
                     </div>
                 )}
             </div>
-            
+
 
             <input
                 type="text"
@@ -213,7 +240,40 @@ const App = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={search}
             />
+
+            <div className="btn btn-rounded fixed geo-location"
+                onClick = {checkGeoLocation}>
+                <span class="material-icons font-xxxl">place</span>
+            </div>
+
+            {query && PopupLocation(query)}
+
+            <footer>
+                <div className="social">
+                    <a href="https://www.buymeacoffee.com/rioapps" target="_blank" rel="noopener noreferrer">
+                        <img src={coffee} alt="buymeacoffee"/>
+                    </a>
+                </div>
+
+                <div className="social">
+                    <a href="https://facebook.com/thaipham3005" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-facebook"></i>
+                    </a>
+                </div>
+                <div className="social">
+                    <a href="https://github.com/thaipham3005" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-github"></i>
+                    </a>
+                </div>
+                <div className="social">
+                    <a href="https://www.linkedin.com/in/pham-nam-thai-631238111/" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </footer>
         </div>
+
+
     );
 };
 
